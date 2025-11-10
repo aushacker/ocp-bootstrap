@@ -6,7 +6,7 @@ kind: Kustomization
 
 resources:
   # - acm-configs/
-  # - acm-placements/
+  - acm-placements/
   # - cluster-configs/
   # - cluster-validations/
   - operators/
