@@ -1,0 +1,25 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: openshift-gitops-operator
+  namespace: openshift-gitops-operator
+  labels:
+    operators.coreos.com/openshift-gitops-operator.openshift-operators: ''
+spec:
+  channel: latest
+  installPlanApproval: Manual
+  name: openshift-gitops-operator
+  source: cs-redhat-operator-index-v4-18
+  sourceNamespace: openshift-marketplace
+  config:
+    env:
+    - name: DISABLE_DEFAULT_ARGOCD_INSTANCE
+      value: 'true'
+    - name: DISABLE_DEFAULT_ARGOCD_CONSOLELINK
+      value: 'true'
+    # ArgoCD instances in the following namespaces can manage cluster scoped resources
+    - name: ARGOCD_CLUSTER_CONFIG_NAMESPACES
+      value: openshift-gitops
+status:
+  state: AtLatestKnown

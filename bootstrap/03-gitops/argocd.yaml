@@ -1,0 +1,148 @@
+---
+apiVersion: argoproj.io/v1beta1
+kind: ArgoCD
+metadata:
+  name: gitops-core
+  namespace: openshift-gitops
+spec:
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 125m
+        memory: 128Mi
+    route:
+      enabled: true
+    service:
+      type: ''
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+    route:
+      enabled: false
+  resourceTrackingMethod: annotation
+  monitoring:
+    enabled: false
+  notifications:
+    enabled: false
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  initialSSHKnownHosts: {}
+  sso:
+    dex:
+      openShiftOAuth: true
+      resources:
+        limits:
+          cpu: 500m
+          memory: 256Mi
+        requests:
+          cpu: 250m
+          memory: 128Mi
+    provider: dex
+  applicationSet:
+    resources:
+      limits:
+        cpu: '2'
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+    webhookServer:
+      ingress:
+        enabled: false
+      route:
+        enabled: false
+  rbac:
+    defaultPolicy: ''
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+    scopes: '[groups]'
+  kustomizeBuildOptions: --enable-alpha-plugins
+  repo:
+    env:
+      - name: KUSTOMIZE_PLUGIN_HOME
+        value: /etc/kustomize/plugin
+    initContainers:
+      - name: policy-generator-install
+        args:
+          - -c
+          - mkdir -p /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/ && cp /policy-generator/PolicyGenerator-not-fips-compliant /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
+        command:
+          - /bin/bash
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.12
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /.config
+            name: kustomize
+    volumeMounts:
+      - mountPath: /.config
+        name: kustomize
+    volumes:
+      - emptyDir: {}
+        name: kustomize
+    resources:
+      limits:
+        cpu: '1'
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  ha:
+    enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  tls:
+    ca: {}
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  controller:
+    processors: {}
+    resources:
+      limits:
+        cpu: '2'
+        memory: 2Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
+    sharding: {}
