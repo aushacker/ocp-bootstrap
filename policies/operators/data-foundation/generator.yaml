@@ -1,0 +1,40 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-data-foundation
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - odf-operator
+placementBindingDefaults:
+  name: odf-operator-binding
+
+policies:
+  - name: odf-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: odf-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: odf-operator
+        compliance: Compliant
+
+  - name: odf-configuration
+    remediationAction: enforce
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: acm-operator
+        compliance: Compliant
+
+policySets:
+  - name: odf-operator
+    placement:
+      placementName: hub-clusters
