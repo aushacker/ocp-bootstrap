@@ -1,0 +1,40 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-nmstate-operator
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - nmstate-operator
+placementBindingDefaults:
+  name: nmstate-operator-binding
+
+policies:
+  - name: nmstate-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: nmstate-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: nmstate-operator
+        compliance: Compliant
+
+  # - name: nmstate-configuration
+  #   remediationAction: enforce
+  #   manifests:
+  #     - path: instance/
+  #   dependencies:
+  #     - name: nmstate-operator
+  #       compliance: Compliant
+
+policySets:
+  - name: nmstate-operator
+    placement:
+      placementName: openshift-clusters

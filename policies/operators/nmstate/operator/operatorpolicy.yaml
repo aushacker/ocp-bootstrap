@@ -1,0 +1,30 @@
+---
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: OperatorPolicy
+metadata:
+  name: nmstate-operator-install
+spec:
+  complianceType: musthave
+  complianceConfig:
+    catalogSourceUnhealthy: NonCompliant
+    deploymentsUnavailable: NonCompliant
+    upgradesAvailable: Compliant
+  remediationAction: enforce
+  removalBehaviour:
+    clusterServiceVersions: Delete
+    customResourceDefinitions: Delete
+    operatorGroups: DeleteIfUnused
+    subscriptions: Delete
+  severity: high
+  upgradeApproval: Manual
+  subscription:
+    channel: stable
+    name: nmstate-operator
+    namespace: openshift-nmstate
+    source: cs-redhat-operator-index-v4-18
+    sourceNamespace: openshift-marketplace
+  operatorGroup:
+    generateName: nmstate-operator-
+    targetNamespaces:
+      - openshift-nmstate
+    upgradeStrategy: Default
