@@ -1,0 +1,16 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cluster-gitops
+  namespace: openshift-gitops
+spec:
+  destinations:
+    - namespace: openshift-gitops
+      server: https://kubernetes.default.svc
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - repo-cluster-gitops
+status: {}
