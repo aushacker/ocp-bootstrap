@@ -1,0 +1,28 @@
+---
+# Top level, app of apps, to bootstrap the management cluster.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: acm-deployment
+  namespace: openshift-gitops
+spec:
+  project: cluster-gitops
+  source:
+    repoURL: https://example.com/cluster-gitops.git
+    targetRevision: HEAD
+    path: apps/acm
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: open-cluster-management
+  ignoreDifferences:
+    # Ignore differences in channel so that Policy can updgrade Subscriptions without Argo interfering.
+    - group: operators.coreos.com
+      kind: Subscription
+      jsonPointers:
+        - /spec/channel
+  syncPolicy:
+    syncOptions:
+      - preserveResourcesOnDeletion=true
+    automated:
+      prune: true
+      selfHeal: true
