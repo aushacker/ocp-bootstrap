@@ -6,8 +6,8 @@ resources:
   # - acm/
   # - acs/
   # - cluster-observability/
-  # - compliance/
-  - data-foundation/
+  - compliance/
+  # - data-foundation/
   # - file-integrity/
   # - nmstate/
   # - openshift-virtualization/

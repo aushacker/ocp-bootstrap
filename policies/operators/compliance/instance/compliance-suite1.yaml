@@ -1,0 +1,8 @@
+---
+apiVersion: compliance.openshift.io/v1alpha1
+kind: ComplianceSuite
+metadata:
+  name: suite1
+  namespace: openshift-compliance
+spec:
+  scans: []

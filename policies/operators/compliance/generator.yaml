@@ -1,0 +1,40 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-compliance
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - compliance-operator
+placementBindingDefaults:
+  name: compliance-operator-binding
+
+policies:
+  - name: compliance-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: compliance-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: compliance-operator
+        compliance: Compliant
+
+  - name: compliance-configuration
+    remediationAction: enforce
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: compliance-operator
+        compliance: Compliant
+
+policySets:
+  - name: compliance-operator
+    placement:
+      placementName: openshift-clusters
