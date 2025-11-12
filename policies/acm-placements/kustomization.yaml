@@ -9,3 +9,15 @@ resources:
   - virtualization-host-clusters.yaml
   - workload-clusters.yaml
   - managedclustersetbinding.yaml
+
+replacements:
+  - sourceValue: prod-clusters
+    targets:
+      - select:
+          kind: Placement
+        fieldPaths:
+          - spec.clusterSets.0
+      - select:
+          kind: ManagedClusterSetBinding
+        fieldPaths:
+          - spec.clusterSet

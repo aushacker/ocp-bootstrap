@@ -4,11 +4,9 @@ kind: Kustomization
 
 namespace: policies
 
-# configurations:
-
 resources:
-  # - acm-configs/
+  - acm-configs/
   - acm-placements/
   # - cluster-configs/
   # - cluster-validations/
-  - operators/
+  # - operators/
