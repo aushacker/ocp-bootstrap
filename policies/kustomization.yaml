@@ -9,4 +9,4 @@ resources:
   - acm-placements/
   # - cluster-configs/
   # - cluster-validations/
-  # - operators/
+  - operators/

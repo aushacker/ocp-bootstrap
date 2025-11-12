@@ -1,0 +1,32 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-file-integrity
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - file-integrity-operator
+placementBindingDefaults:
+  name: file-integrity-operator-binding
+
+policies:
+  - name: file-integrity-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: file-integrity-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: file-integrity-operator
+        compliance: Compliant
+
+policySets:
+  - name: file-integrity-operator
+    placement:
+      placementName: openshift-clusters
