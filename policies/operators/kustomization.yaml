@@ -8,7 +8,7 @@ resources:
   # - cluster-observability/
   # - compliance/
   # - data-foundation/
-  - file-integrity/
+  # - file-integrity/
   # - nmstate/
-  # - openshift-virtualization/
+  - openshift-virtualization/
   # - talm/

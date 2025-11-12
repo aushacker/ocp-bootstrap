@@ -1,0 +1,32 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-virtualization
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - openshift-virtualization
+placementBindingDefaults:
+  name: virtualization-operator-binding
+
+policies:
+  - name: openshift-virt-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: openshift-virt-operator-config
+    remediationAction: InformOnly
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: openshift-virt-operator
+        compliance: Compliant
+
+policySets:
+  - name: openshift-virtualization
+    placement:
+      placementName: virtualization-hosts
