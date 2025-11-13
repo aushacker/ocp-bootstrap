@@ -11,7 +11,8 @@ resources:
   # - data-foundation/
   # - file-integrity/
   # - local-storage
-  - lvm-storage
+  # - lvm-storage
+  - metallb/
   # - nmstate/
   # - openshift-virtualization/
   # - talm/

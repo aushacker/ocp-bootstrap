@@ -2,39 +2,35 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: pg-openshift-compliance
+  name: metallb-policies
 policyDefaults:
   namespace: policies
   remediationAction: enforce
-  consolidateManifests: false
-  policySets:
-    - compliance-operator
 placementBindingDefaults:
-  name: compliance-operator-binding
+  name: metallb-operator-binding
 
 policies:
-  - name: compliance-operator
-    remediationAction: enforce
+  - name: metallb-operator
     manifests:
       - path: operator/
 
-  - name: compliance-operator-status
+  - name: metallb-operator-status
     remediationAction: InformOnly
     manifests:
       - path: health/
     dependencies:
-      - name: compliance-operator
+      - name: metallb-operator
         compliance: Compliant
 
-  - name: compliance-operator-configuration
+  - name: metallb-operator-configuration
     remediationAction: enforce
     manifests:
       - path: instance/
     dependencies:
-      - name: compliance-operator
+      - name: metallb-operator
         compliance: Compliant
 
 policySets:
-  - name: compliance-operator
+  - name: metallb-operator-policyset
     placement:
       placementName: openshift-clusters

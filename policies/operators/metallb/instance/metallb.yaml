@@ -1,0 +1,7 @@
+---
+apiVersion: metallb.io/v1beta1
+kind: MetalLb
+metadata:
+  name: ""
+  namespace: metallb-system
+spec: {}
