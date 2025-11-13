@@ -1,0 +1,38 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: lvm-storage-operator
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  policySets:
+    - lvm-storage-operator
+placementBindingDefaults:
+  name: lvm-storage-operator-binding
+
+policies:
+  - name: lvm-storage-operator
+    manifests:
+      - path: operator/
+
+  - name: lvm-storage-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: lvm-storage-operator
+        compliance: Compliant
+
+  - name: lvm-storage-configuration
+    remediationAction: enforce
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: lvm-storage-operator
+        compliance: Compliant
+
+policySets:
+  - name: lvm-storage-operator
+    placement:
+      placementName: hub-clusters

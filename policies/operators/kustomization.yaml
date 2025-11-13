@@ -10,7 +10,8 @@ resources:
   # - compliance/
   # - data-foundation/
   # - file-integrity/
-  - local-storage
+  # - local-storage
+  - lvm-storage
   # - nmstate/
   # - openshift-virtualization/
   # - talm/
