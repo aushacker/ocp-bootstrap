@@ -1,0 +1,22 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: local-storage-operator
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  policySets:
+    - local-storage-operator
+placementBindingDefaults:
+  name: local-storage-operator-binding
+
+policies:
+  - name: local-storage-operator
+    manifests:
+      - path: operator/
+
+policySets:
+  - name: local-storage-operator
+    placement:
+      placementName: hub-clusters

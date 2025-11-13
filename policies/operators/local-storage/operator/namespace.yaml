@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: openshift-local-storage
+  labels:
+    openshift.io/cluster-monitoring: 'true'
+  # annotations:
+  #   # (Opt) Allow local storage creation on infrastructure Nodes
+  #   openshift.io/node-selector: ''
+  #   # (Opt) Allow local storage to run on the management pool of CPUs in single-node deployment
+  #   workload.openshift.io/allowed: management
