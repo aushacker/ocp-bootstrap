@@ -1,0 +1,69 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: gen-policy-generator
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  policySets:
+    - cluster-configs
+placementBindingDefaults:
+  name: cluster-config-binding
+
+policies:
+  - name: etcd-encryption
+    consolidateManifests: false
+    manifests:
+      - path: etcd-encryption/apiserver.yaml
+      - path: etcd-encryption/health/
+        remediationAction: InformOnly
+        extraDependencies:
+          - name: etcd-encryption
+            kind: ConfigurationPolicy
+            compliance: Compliant
+
+  - name: etcd-backup
+    configurationPolicyAnnotations:
+      policy.open-cluster-management.io/disable-templates: 'true'
+    dependencies:
+      - name: etcd-encryption
+        compliance: Compliant
+    manifests:
+      - path: etcd-backup/
+
+  - name: acm-clusterclaims
+    manifests:
+      - path: clusterclaims/
+
+  - name: ocp-certificates
+    manifests:
+      - path: certificates/ocp-certs.yaml
+
+# Start OAuth configuraiton
+# Likely to need adjustments base on specific environment needs.
+  - name: ldap-bindpassword
+    description: Checks if bindpassword secret has been created
+    remediationAction: InformOnly
+    manifests:
+      - path: oauth/ldap-bindpassword.yaml
+
+  - name: ldap-sync
+    manifests:
+      - path: ldap-sync
+    dependencies:
+      - name: ldap-bindpassword
+    ignorePending: true
+
+  - name: oauth-config
+    complianceType: mustonlyhave
+    manifests:
+      - path: oauth/oauth-config.yaml
+    dependencies:
+      - name: ldap-bindpassword
+# End OAuth configuraiton
+
+policySets:
+  - name: cluster-configs
+    placement:
+      placementName: openshift-clusters

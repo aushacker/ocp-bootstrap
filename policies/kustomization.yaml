@@ -7,6 +7,6 @@ namespace: policies
 resources:
   - acm-configs/
   - acm-placements/
-  # - cluster-configs/
+  - cluster-configs/
   # - cluster-validations/
   - operators/

@@ -11,7 +11,7 @@ resources:
   - managedclustersetbinding.yaml
 
 replacements:
-  - sourceValue: prod-clusters
+  - sourceValue: prod-clusters # requires kustomize 5.7.0+
     targets:
       - select:
           kind: Placement
