@@ -1,0 +1,27 @@
+---
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: OperatorPolicy
+metadata:
+  name: acs-operator-install
+spec:
+  complianceType: musthave
+  complianceConfig:
+    catalogSourceUnhealthy: NonCompliant
+    deploymentsUnavailable: NonCompliant
+    upgradesAvailable: Compliant
+  remediationAction: enforce
+  removalBehavior:
+    clusterServiceVersions: Delete
+    customResourceDefinitions: Delete
+    operatorGroups: DeleteIfUnused
+    subscriptions: Delete
+  severity: high
+  upgradeApproval: Automatic
+  subscription:
+    channel: rhacs-4.9
+    name: rhacs-operator
+    namespace: rhacs-operator
+    source: cs-redhat-operator-index-v4-18
+    sourceNamespace: openshift-marketplace
+  operatorGroup:
+    name: rhacs-operator-group

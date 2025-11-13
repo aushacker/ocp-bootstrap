@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sensor-tls
+  namespace: stackrox
+  labels:
+    certificate_key_name: sensor-cert.pem
+data: '{{hub copySecretData "" "sensor-tls" hub}}'
+type: Opaque

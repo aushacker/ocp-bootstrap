@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: collector-tls
+  namespace: stackrox
+  labels:
+    certificate_key_name: collector-cert.pem
+data: '{{hub copySecretData "" "collector-tls" hub}}'
+type: Opaque

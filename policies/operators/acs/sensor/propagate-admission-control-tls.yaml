@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: admission-control-tls
+  namespace: stackrox
+  labels:
+    certificate_key_name: admission-control-cert.pem
+data: '{{hub copySecretData "" "admission-control-tls" hub}}'
+type: Opaque

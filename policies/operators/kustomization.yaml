@@ -4,9 +4,9 @@ kind: Kustomization
 
 resources:
   # - acm/
-  # - acs/
+  - acs/
   # - cluster-logging/
-  - cluster-observability/
+  # - cluster-observability/
   # - compliance/
   # - data-foundation/
   # - file-integrity/
