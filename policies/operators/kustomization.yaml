@@ -5,10 +5,11 @@ kind: Kustomization
 resources:
   # - acm/
   # - acs/
+  - cluster-logging/
   # - cluster-observability/
   # - compliance/
   # - data-foundation/
   # - file-integrity/
   # - nmstate/
-  - openshift-virtualization/
+  # - openshift-virtualization/
   # - talm/

@@ -1,0 +1,40 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-cluster-logging
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - cluster-logging
+placementBindingDefaults:
+  name: cluster-logging-binding
+
+policies:
+  - name: cluster-logging-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: cluster-logging-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: cluster-logging-operator
+        compliance: Compliant
+
+  - name: cluster-logging-configuration
+    remediationAction: enforce
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: cluster-logging-operator
+        compliance: Compliant
+
+policySets:
+  - name: cluster-logging-operator
+    placement:
+      placementName: openshift-clusters
