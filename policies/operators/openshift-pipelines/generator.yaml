@@ -1,0 +1,32 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-pipelines-operator
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - openshift-pipelines-operator
+placementBindingDefaults:
+  name: openshift-pipelines-operator-binding
+
+policies:
+  - name: openshift-pipelines-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: openshift-pipelines-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: openshift-pipelines-operator
+        compliance: Compliant
+
+policySets:
+  - name: openshift-pipelines-operator
+    placement:
+      placementName: openshift-clusters
