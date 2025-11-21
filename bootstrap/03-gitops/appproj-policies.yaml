@@ -12,5 +12,5 @@ spec:
     - group: '*'
       kind: '*'
   sourceRepos:
-    - repo-policies
+    - 'https://'
 status: {}

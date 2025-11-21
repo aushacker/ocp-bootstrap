@@ -12,5 +12,5 @@ spec:
     - group: '*'
       kind: '*'
   sourceRepos:
-    - repo-cluster-gitops
+    - 'https://'
 status: {}
