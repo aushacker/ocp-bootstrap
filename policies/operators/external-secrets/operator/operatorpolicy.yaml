@@ -1,0 +1,29 @@
+---
+apiVersion: policy.open-cluster-management.io/v1beta1
+kind: OperatorPolicy
+metadata:
+  name: external-secrets-operator-install
+spec:
+  complianceType: musthave
+  complianceConfig:
+    catalogSourceUnhealthy: NonCompliant
+    deploymentsUnavailable: NonCompliant
+    upgradesAvailable: Compliant
+  remediationAction: enforce
+  removalBehaviour:
+    clusterServiceVersions: Delete
+    customResourceDefinitions: Delete
+    operatorGroups: DeleteIfUnused
+    subscriptions: Delete
+  severity: high
+  upgradeApproval: Manual
+  subscription:
+    channel: stable-v1
+    name: external-secrets-operator
+    namespace: external-secrets-operator
+    source: cs-redhat-operator-index-v4-20
+    sourceNamespace: openshift-marketplace
+  operatorGroup:
+    generateName: external-secrets-operator-
+    spec:
+      upgradeStrategy: Default

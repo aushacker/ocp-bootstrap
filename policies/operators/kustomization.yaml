@@ -3,17 +3,18 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  # - acm/
+  - acm/
   # - acs/
   # - cluster-logging/
   # - cluster-observability/
   # - compliance/
   # - data-foundation/
+  # - external-secrets/
   # - file-integrity/
   # - local-storage/
   # - lvm-storage
   # - metallb/
   # - nmstate/
-  - openshift-pipelines/
+  # - openshift-pipelines/
   # - openshift-virtualization/
   # - talm/

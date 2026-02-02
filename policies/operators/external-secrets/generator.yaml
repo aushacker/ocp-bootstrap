@@ -1,0 +1,40 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-external-secrets
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - external-secrets-operator
+placementBindingDefaults:
+  name: external-secrets-operator-binding
+
+policies:
+  - name: external-secrets-operator
+    remediationAction: enforce
+    manifests:
+      - path: operator/
+
+  - name: external-secrets-operator-status
+    remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: external-secrets-operator
+        compliance: Compliant
+
+  - name: external-secrets-operator-configuration
+    remediationAction: enforce
+    manifests:
+      - path: instance/
+    dependencies:
+      - name: external-secrets-operator
+        compliance: Compliant
+
+policySets:
+  - name: external-secrets-operator
+    placement:
+      placementName: openshift-clusters
