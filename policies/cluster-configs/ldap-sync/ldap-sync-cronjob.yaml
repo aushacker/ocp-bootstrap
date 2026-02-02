@@ -33,10 +33,10 @@ spec:
                 name: "ldap-group-syncer"
             - name: "ldap-bind-password"
               secret:
-                secretName: "ldap-secret"
+                secretName: "ldap-bind-password"
             - name: "ldap-ca"
               configMap:
-                name: "ca-config-map"
+                name: "ldap-ca-chain"
           restartPolicy: "Never"
           terminationGracePeriodSeconds: 30
           activeDeadlineSeconds: 500
