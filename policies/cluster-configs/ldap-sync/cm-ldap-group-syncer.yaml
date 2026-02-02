@@ -8,7 +8,7 @@ data:
   sync.yaml: |
     kind: LDAPSyncConfig
     apiVersion: v1
-    url: {{ fromConfigMap "openshift-config" "ldap-config" "ldapAddress" }}
+    url: {{ fromConfigMap "openshift-config" "ldap-config" "ldapUrl" }}
     insecure: true
     bindDN: {{ fromConfigMap "openshift-config" "ldap-config" "bindDN" }}
     bindPassword:

@@ -18,9 +18,9 @@ spec:
         bindPassword:
           name: ldap-bind-password
         ca:
-          name: ldap-ca-cert
+          name: ldap-ca-chain
         insecure: false
-        url: ""
+        url: '{{ fromConfigMap "openshift-config" "ldap-config" "ldapUrl" }}'
       mappingMethod: claim
       name: IID
       type: LDAP

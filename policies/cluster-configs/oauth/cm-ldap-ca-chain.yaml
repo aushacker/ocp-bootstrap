@@ -1,0 +1,11 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ldap-ca-chain
+  namespace: openshift-config
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    CA Chain in PEM format
+    -----END CERTIFICATE-----
