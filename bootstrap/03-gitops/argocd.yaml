@@ -91,7 +91,7 @@ spec:
           - mkdir -p /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/ && cp /policy-generator/PolicyGenerator-not-fips-compliant /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
         command:
           - /bin/bash
-        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.12
+        image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.15
         imagePullPolicy: Always
         volumeMounts:
           - mountPath: /.config
@@ -128,6 +128,15 @@ spec:
         memory: 128Mi
   tls:
     ca: {}
+    # Enable when custom PKI in use for repositories.
+    # See https://argocd-operator.readthedocs.io/en/latest/reference/argocd/#tls-options
+    # initialCerts:
+    #   myrepo.example.com: |
+    #     -----BEGIN CERTIFICATE-----
+    #     -----END CERTIFICATE-----
+    #   myotherrepo.example.com: |
+    #     -----BEGIN CERTIFICATE-----
+    #     -----END CERTIFICATE-----
   redis:
     resources:
       limits:
