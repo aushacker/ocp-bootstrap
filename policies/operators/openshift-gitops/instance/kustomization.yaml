@@ -1,0 +1,13 @@
+# Used for initial bootstrap.
+# Ignored by ACM policy.
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  #- namespace.yaml
+  - appproj-cluster-gitops.yaml
+  - appproj-policies.yaml
+  - argocd.yaml
+  # Manually create repository Secrets
+  # - git-repos-template.yaml

@@ -1,3 +1,5 @@
+# Not automatically applied due to secret content.
+# These need to be manually applied and not stored in the repo.
 ---
 apiVersion: v1
 kind: Secret
