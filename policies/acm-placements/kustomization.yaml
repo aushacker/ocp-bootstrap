@@ -20,4 +20,5 @@ replacements:
       - select:
           kind: ManagedClusterSetBinding
         fieldPaths:
+          - metadata.name
           - spec.clusterSet
