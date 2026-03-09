@@ -10,7 +10,7 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: ''
+  url: https://github.com/aushacker/ocp-bootstrap.git
   username: USERID
   password: TOKEN
 ---
@@ -23,6 +23,6 @@ metadata:
     argocd.argoproj.io/secret-type: repository
 stringData:
   type: git
-  url: ''
+  url: https://github.com/aushacker/ocp-bootstrap.git
   username: USERID
   password: TOKEN

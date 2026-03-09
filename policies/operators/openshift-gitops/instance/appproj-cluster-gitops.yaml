@@ -12,5 +12,5 @@ spec:
     - group: '*'
       kind: '*'
   sourceRepos:
-    - 'https://'
+    - https://github.com/aushacker/ocp-bootstrap.git
 status: {}
