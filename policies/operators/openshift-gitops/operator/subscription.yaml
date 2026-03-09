@@ -10,7 +10,7 @@ spec:
   channel: latest
   installPlanApproval: Manual
   name: openshift-gitops-operator
-  source: cs-redhat-operator-index-v4-20
+  source: redhat-operators
   sourceNamespace: openshift-marketplace
   config:
     env:
