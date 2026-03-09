@@ -1,0 +1,8 @@
+# Used for initial bootstrap.
+# Ignored by ACM policy.
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - multiclusterhub.yaml
