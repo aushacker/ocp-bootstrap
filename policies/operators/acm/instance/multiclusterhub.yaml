@@ -7,3 +7,4 @@ metadata:
   annotations:
     #installer.open-cluster-management.io/mce-subscription-spec: '{"source": "cs-redhat-operator-index-v4-20"}'
     installer.open-cluster-management.io/mce-subscription-spec: '{"source":"redhat-operators"}'
+spec: {}
