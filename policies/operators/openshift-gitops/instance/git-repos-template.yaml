@@ -9,6 +9,8 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
+  name: repo-cluster-gitops
+  project: cluster-gitops
   type: git
   url: https://github.com/aushacker/ocp-bootstrap.git
   username: USERID
@@ -22,6 +24,8 @@ metadata:
   labels:
     argocd.argoproj.io/secret-type: repository
 stringData:
+  name: repo-policies
+  project: acm-policies
   type: git
   url: https://github.com/aushacker/ocp-bootstrap.git
   username: USERID
