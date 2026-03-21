@@ -6,6 +6,8 @@ kind: Kustomization
 
 resources:
   # - git-repos-template.yaml # Manually update and create repository secrets
+  - cr-argocd-extended.yaml
+  - crb-argocd-extended.yaml
   - appproj-cluster-gitops.yaml
   - appproj-policies.yaml
   - argocd.yaml

@@ -9,6 +9,11 @@ spec:
   destinations:
     - namespace: policies
       server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: cluster.open-cluster-management.io
+      kind: ManagedClusterSet
   namespaceResourceWhitelist:
     - group: '*'
       kind: '*'
