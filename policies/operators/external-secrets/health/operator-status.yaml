@@ -9,7 +9,7 @@ spec:
   object-templates-raw: |
     {{/* ##  Get the subscription we are checking health for ## */}}
     {{- $op_namespace := "external-secrets-operator" }}
-    {{- $op_subName := "external-secrets-operator" }}
+    {{- $op_subName := "openshift-external-secrets-operator" }}
    
     {{/* ##  Ensure the Subscription is at latest known release status ## */}}
     {{- $sub := (lookup "operators.coreos.com/v1alpha1" "Subscription" $op_namespace $op_subName) }}
