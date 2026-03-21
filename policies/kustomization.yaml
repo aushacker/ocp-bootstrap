@@ -5,6 +5,7 @@ kind: Kustomization
 namespace: policies
 
 resources:
+  - namespace.yaml
   - acm-configs/
   - acm-placements/
   - cluster-configs/
