@@ -1,0 +1,49 @@
+---
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: pg-openshift-gitops
+policyDefaults:
+  namespace: policies
+  remediationAction: enforce
+  consolidateManifests: false
+  policySets:
+    - openshift-gitops-operator
+placementBindingDefaults:
+  name: openshift-gitops-operator-binding
+
+policies:
+  - name: openshift-gitops-operator
+    description: Ensure deployment of the openshift-gitops operator.
+    remediationAction: enforce
+    manifests:
+      - path: operator/namespace.yaml
+      - path: operator/operatorgroup.yaml
+      - path: operator/subscription.yaml
+
+  - name: openshift-gitops-operator-status
+    description: Non-compliance indicates an operator upgrade is available.
+    remediationAction: InformOnly
+    manifests:
+      - path: health/operator-status.yaml
+    dependencies:
+      - name: openshift-gitops-operator
+        compliance: Compliant
+
+  - name: openshift-gitops-operator-configuration
+    description: Ensure configuration of the openshift-gitops operator.
+    remediationAction: enforce
+    manifests:
+      - path: instance/appproj-cluster-gitops.yaml
+      - path: instance/appproj-policies.yaml
+      - path: instance/argocd.yaml
+      - path: instance/cr-argocd-extended.yaml
+      - path: instance/crb-argocd-extended.yaml
+    dependencies:
+      - name: openshift-gitops-operator
+        compliance: Compliant
+
+policySets:
+  - name: openshift-gitops-operator
+    placement:
+      placementName: openshift-clusters
