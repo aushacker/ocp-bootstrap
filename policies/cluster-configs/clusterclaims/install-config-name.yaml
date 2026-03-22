@@ -3,6 +3,8 @@ apiVersion: cluster.open-cluster-management.io/v1alpha1
 kind: ClusterClaim
 metadata:
   name: install-config-name
+  annotations:
+    kubernetes.io/description: Extracts the cluster name from the api url. Useful for the hub cluster (local-cluster) to know its real name in a multi hub (active-passive) ACM configuration.
 spec:
   value: '{{ $n := split "." (lookup "config.openshift.io/v1" "Infrastructure" "" "cluster").status.apiServerURL }}{{
     $n._1 }}'
