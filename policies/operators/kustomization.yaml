@@ -12,9 +12,10 @@ resources:
   # - external-secrets/
   # - file-integrity/
   # - local-storage/
-  # - lvm-storage
+  # - lvm-storage/
   # - metallb/
   # - nmstate/
+  # - openshift-gitops/
   # - openshift-pipelines/
   # - openshift-virtualization/
   # - talm/

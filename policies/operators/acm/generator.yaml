@@ -14,26 +14,30 @@ placementBindingDefaults:
 
 policies:
   - name: acm-operator
+    description: Ensure deployment of the ACM operator to hub clusters.
     remediationAction: enforce
     manifests:
       - path: operator/namespace.yaml
-      - path: operator/operatorpolicy.yaml
+      - path: operator/operatorgroup.yaml
+      - path: operator/subscription.yaml
 
   - name: acm-operator-status
+    description: Non-compliance indicates an operator upgrade is available.
     remediationAction: InformOnly
     manifests:
       - path: health/operator-status.yaml
-        extraDependencies:
-          - name: acm-operator
-            compliance: Compliant
+    dependencies:
+      - name: acm-operator
+        compliance: Compliant
 
-  - name: acm-multiclusterhub
+  - name: acm-operator-configuration
+    description: Ensure configuration of the ACM operator.
     remediationAction: enforce
     manifests:
       - path: instance/multiclusterhub.yaml
-        extraDependencies:
-          - name: acm-operator
-            compliance: Compliant
+    dependencies:
+      - name: acm-operator
+        compliance: Compliant
 
 policySets:
   - name: acm-operator
