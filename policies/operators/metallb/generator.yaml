@@ -11,10 +11,12 @@ placementBindingDefaults:
 
 policies:
   - name: metallb-operator
+    description: Ensure deployment of the MetalLB operator.
     manifests:
       - path: operator/
 
   - name: metallb-operator-status
+    description: Non-compliance indicates an operator upgrade is available.
     remediationAction: InformOnly
     manifests:
       - path: health/
@@ -23,6 +25,7 @@ policies:
         compliance: Compliant
 
   - name: metallb-operator-configuration
+    description: Ensure configuration of the MetalLB operator.
     remediationAction: enforce
     manifests:
       - path: instance/

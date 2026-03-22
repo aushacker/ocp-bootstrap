@@ -16,7 +16,7 @@ spec:
     operatorGroups: DeleteIfUnused
     subscriptions: Delete
   severity: critical
-  upgradeApproval: Automatic
+  upgradeApproval: None
   subscription:
     channel: stable
     name: metallb-operator
