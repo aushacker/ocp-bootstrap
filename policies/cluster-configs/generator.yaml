@@ -12,6 +12,10 @@ placementBindingDefaults:
   name: cluster-config-binding
 
 policies:
+  - name: acm-clusterclaims
+    manifests:
+      - path: clusterclaims/
+
   - name: etcd-encryption
     consolidateManifests: false
     manifests:
@@ -32,9 +36,10 @@ policies:
     manifests:
       - path: etcd-backup/
 
-  - name: acm-clusterclaims
+  - name: managed-cluster-labels
+    description: Ensures ManagedClusters are correctly labelled as this controls key function within ACM.
     manifests:
-      - path: clusterclaims/
+      - path: managed-cluster-labels
 
   - name: ocp-certificates
     manifests:
