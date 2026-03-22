@@ -16,6 +16,11 @@ policies:
     manifests:
       - path: clusterclaims/
 
+  - name: acm-managed-cluster-labels
+    description: Ensures ManagedClusters are correctly labelled as this controls key function within ACM.
+    manifests:
+      - path: managed-cluster-labels
+
   - name: etcd-encryption
     consolidateManifests: false
     manifests:
@@ -35,11 +40,6 @@ policies:
         compliance: Compliant
     manifests:
       - path: etcd-backup/
-
-  - name: managed-cluster-labels
-    description: Ensures ManagedClusters are correctly labelled as this controls key function within ACM.
-    manifests:
-      - path: managed-cluster-labels
 
   - name: ocp-certificates
     manifests:

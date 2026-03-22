@@ -7,7 +7,8 @@ resources:
   - openshift-clusters.yaml
   - virtualization-host-clusters.yaml
   - workload-clusters.yaml
-  - managedclustersetbinding.yaml
+  - mcsb-default.yaml
+  - mcsb-template.yaml
 
 replacements:
   - sourceValue: prod-clusters # requires kustomize 5.7.0+
@@ -18,6 +19,7 @@ replacements:
           - spec.clusterSets.0
       - select:
           kind: ManagedClusterSetBinding
+          name: TOBESET
         fieldPaths:
           - metadata.name
           - spec.clusterSet
