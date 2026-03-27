@@ -10,16 +10,21 @@ spec:
     deploymentsUnavailable: NonCompliant
     upgradesAvailable: Compliant
   remediationAction: enforce
-  removalBehaviour:
+  removalBehavior:
     clusterServiceVersions: Delete
     customResourceDefinitions: Delete
     operatorGroups: DeleteIfUnused
     subscriptions: Delete
   severity: critical
-  upgradeApproval: Manual
+  upgradeApproval: None
   subscription:
     channel: stable
     name: kubevirt-hyperconverged
     namespace: openshift-cnv
-    source: cs-redhat-operator-index-v4-18
+    source: cs-redhat-operator-index-v4-20
     sourceNamespace: openshift-marketplace
+  operatorGroup:
+    name: kubevirt-hyperconverged-group
+    namespace: openshift-cnv
+    targetNamespaces:
+      - openshift-cnv

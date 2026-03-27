@@ -14,12 +14,23 @@ placementBindingDefaults:
 
 policies:
   - name: openshift-virt-operator
+    description: Ensure deployment of the openshift-virtualization operator.
     remediationAction: enforce
     manifests:
       - path: operator/
 
-  - name: openshift-virt-operator-config
+  - name: openshift-virt-operator-status
+    description: Non-compliance indicates an operator upgrade is available.
     remediationAction: InformOnly
+    manifests:
+      - path: health/
+    dependencies:
+      - name: openshift-virt-operator
+        compliance: Compliant
+
+  - name: openshift-virt-operator-config
+    description: Ensure configuration of the openshift-virtualization operator.
+    remediationAction: enforce
     manifests:
       - path: instance/
     dependencies:
@@ -29,4 +40,4 @@ policies:
 policySets:
   - name: openshift-virtualization
     placement:
-      placementName: virtualization-hosts
+      placementName: virtualization-host-clusters
